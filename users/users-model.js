@@ -2,7 +2,7 @@ const db = require('../data/config')
 
 function getUsers() {
     return db('users')
-        .select('username')
+        .select('id', 'username')
 }
 
 module.exports = {

@@ -3,15 +3,15 @@ const Users = require('../users/users-model')
 function users() {
     return async (req,res,next) => {
         try {
-            const usernames = await Users.getUsers()
+            const users = await Users.getUsers()
 
-            if (!usernames) {
+            if (!users) {
                 return res.json({
                     message: "Oops something went wrong"
                 })
             }
 
-            req.usernames = usernames
+            req.users = users
 
             next()
         } catch(err) {
