@@ -1,10 +1,10 @@
 const express = require('express')
-const Users = require('./users-model')
 const router = express.Router()
+const Validate = require('../middleware/validate')
 
-router.get('/users', async (req,res) => {
+router.get('/users', Validate.users(), async (req,res) => {
     try {
-        res.json(await Users.getUsers())
+        res.json(req.usernames)
     } catch(err) {
         res.status(500).json({
             message: "There was an error retrieving users"
