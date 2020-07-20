@@ -7,7 +7,7 @@ function users() {
 
             if (!users) {
                 return res.json({
-                    message: "Oops something went wrong"
+                    message: "Failed to retrieve users"
                 })
             }
 
@@ -15,13 +15,46 @@ function users() {
 
             next()
         } catch(err) {
-            res.status(500).json({
-                message: "There was an error processing your request"
-            })
+            next(err)
+        }
+    }
+}
+
+function user() {
+    return async (req,res,next) => {
+        try {
+            const user = await Users.getUser(req.params.id)
+
+            if (!user) {
+                res.status(404).json({
+                    message: "User not found"
+                })
+            }
+
+            req.user = user
+
+            next()
+        } catch(err) {
+            next(err)
+        }
+    }
+}
+
+function credentials() {
+    return async (req,res,next) => {
+        try {
+            if (!req.body.username || !req.body.password) {
+                res.status(400).json({
+                    message: "Please provide a Username and Password"
+                })
+            }
+            next()
+        } catch(err) {
+            next(err)
         }
     }
 }
 
 module.exports = {
-    users
+    users, user, credentials
 }
