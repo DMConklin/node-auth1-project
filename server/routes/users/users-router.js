@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const Users = require('../../data/models/users-model')
+const Users = require('./users-model')
 const bcrypt = require('bcryptjs')
-const middleware = require('../middleware')
+const middleware = require('./users-middleware')
 
 router.get('/users', middleware.restrict(), async (req,res,next) => {
     try {

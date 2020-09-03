@@ -1,4 +1,4 @@
-const db = require('../config')
+const db = require('../../../data/config')
 
 async function createUser(user) {
     const id = await db('users')

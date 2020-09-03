@@ -2,7 +2,7 @@ const express = require('express')
 const server = express()
 const session = require('express-session')
 const KnexSessionStore = require('connect-session-knex')(session)
-const usersRouter = require('./routes/users-router')
+const usersRouter = require('./routes/users/users-router')
 const db = require('../data/config')
 
 server.use(express.json())
